@@ -47,10 +47,10 @@ namespace ImageClassificationApp
         private string GetPrediction() 
         {
             var imageBytes = File.ReadAllBytes(pictureBox1.ImageLocation);
+            double acceptableValue = 0.50;
             ModelInput input = new();
             input.ImageSource = imageBytes;
             var result = MLModelTheSimpsons.Predict(input);
-            double acceptableValue = 0.50;
 
             return result.Score.All(x => x < acceptableValue) ?
                 "This picture does not match a Simpsons family member." : result.PredictedLabel;
